@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://cqc17hoh2awcr"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_dea05"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_thkgu"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_fw86u"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_nek2g"]
+
+[node name="DebugScene" type="Node3D"]
+
+[node name="LevelGeometry" type="Node3D" parent="."]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="LevelGeometry"]
+transform = Transform3D(4.20694, 0, 0, 0, 0.35419, 0, 0, 0, 4.43779, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LevelGeometry/StaticBody3D"]
+transform = Transform3D(5.73819, 0, 0, 0, 1.00088, 0, 0, 0, 4.81145, 0, 0, 0)
+mesh = SubResource("BoxMesh_dea05")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LevelGeometry/StaticBody3D"]
+shape = SubResource("BoxShape3D_thkgu")
+
+[node name="Player" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.20325, 0)
+
+[node name="RigidBody3D" type="RigidBody3D" parent="Player"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player/RigidBody3D"]
+mesh = SubResource("CapsuleMesh_fw86u")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player/RigidBody3D"]
+shape = SubResource("CapsuleShape3D_nek2g")
