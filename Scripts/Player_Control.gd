@@ -19,18 +19,28 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 
-	# Handle jump.
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
-
-	# Get the input direction and handle the movement/deceleration.
+	# Get the input direction
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_backwards")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	
+		# Handle jump.
+	if Input.is_action_just_pressed("jump") and is_on_floor():
+		velocity.y = JUMP_VELOCITY
+	
+	## Handle Acceleration and Deceleration
 	if direction:
 		velocity.x = move_toward(velocity.x, direction.x * SPEED, SPEED)
 		velocity.z = move_toward(velocity.z, direction.z * SPEED, SPEED)
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
-
+		velocity.x = move_toward(velocity.x, 0, decelerate_player())
+		velocity.z = move_toward(velocity.z, 0, decelerate_player())
+	
+	
 	move_and_slide()
+
+#Calculate Deceleration
+func decelerate_player():
+	if is_on_floor():
+		return 2
+	else:
+		return 0.1
