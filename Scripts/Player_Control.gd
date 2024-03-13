@@ -6,7 +6,13 @@ const JUMP_VELOCITY = 4.5
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+## Create a camera variable
+var camera
 
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	# Import camera
+	camera = get_node("./OrbitCamera")
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -19,7 +25,7 @@ func _physics_process(delta):
 
 	# Get the input direction and handle the movement/deceleration.
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_backwards")
-	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	var direction = (camera.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
