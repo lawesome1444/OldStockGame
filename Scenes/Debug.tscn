@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://cqc17hoh2awcr"]
+[gd_scene load_steps=9 format=3 uid="uid://cqc17hoh2awcr"]
 
 [ext_resource type="Texture2D" uid="uid://sohn2q70u6a8" path="res://Assets/Textures/debug.png" id="1_85avr"]
 [ext_resource type="Script" path="res://Scripts/Player_Control.gd" id="2_ks6rv"]
+[ext_resource type="Script" path="res://Scripts/Camera_Control.gd" id="3_rn5nj"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wl6i5"]
 albedo_texture = ExtResource("1_85avr")
@@ -45,6 +46,7 @@ mesh = SubResource("CapsuleMesh_fw86u")
 skeleton = NodePath("")
 
 [node name="OrbitCamera" type="Node3D" parent="Player/CharacterBody3D"]
+script = ExtResource("3_rn5nj")
 
 [node name="Camera3D" type="Camera3D" parent="Player/CharacterBody3D/OrbitCamera"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00309181, 0.00878096, 3.99993)
