@@ -3,15 +3,12 @@ extends Node3D
 # Speed of camera rotation
 var rotation_speed = 0.1
 
-# Target node to rotate around
-var target_node : Node
+var player_node : CharacterBody3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	target_node = get_parent_node_3d()
-	# Make sure we have a target node
-	assert(target_node, "Target node not set for camera rotation!")
 	
+	player_node = get_node("../../CharacterBody3D")
 	# Lock the mouse to the window
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
@@ -37,12 +34,15 @@ func _input(event):
 func rotate_camera(rotation):
 	# Rotate the camera around the target node
 	var new_rotation = self.rotation_degrees
-	new_rotation.y -= rotation.x * rotation_speed
+	var new_player_rotation = player_node.global_rotation_degrees
+	new_player_rotation.y -= rotation.x * rotation_speed
 	new_rotation.x -= rotation.y * rotation_speed
 
 	# Clamp the rotation to avoid flipping the camera
 	new_rotation.x = clamp(new_rotation.x, -89, 89)
 
 	# Apply the new rotation to the camera
-	self.rotation_degrees = new_rotation
+	self.rotation_degrees.x = new_rotation.x
+	player_node.global_rotation_degrees.y = new_player_rotation.y
+	
 	#
