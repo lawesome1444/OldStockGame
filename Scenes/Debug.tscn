@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://cqc17hoh2awcr"]
+[gd_scene load_steps=8 format=3 uid="uid://cqc17hoh2awcr"]
 
 [ext_resource type="Texture2D" uid="uid://sohn2q70u6a8" path="res://Assets/Textures/debug.png" id="1_85avr"]
+[ext_resource type="Script" path="res://Scripts/Player_Control.gd" id="2_ks6rv"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wl6i5"]
 albedo_texture = ExtResource("1_85avr")
@@ -13,9 +14,9 @@ size = Vector3(30, 1, 30)
 [sub_resource type="BoxShape3D" id="BoxShape3D_thkgu"]
 size = Vector3(30, 1, 30)
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_fw86u"]
-
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_nek2g"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_fw86u"]
 
 [node name="DebugScene" type="Node3D"]
 
@@ -33,13 +34,20 @@ shape = SubResource("BoxShape3D_thkgu")
 [node name="Player" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.18751, 0)
 
-[node name="RigidBody3D" type="RigidBody3D" parent="Player"]
+[node name="CharacterBody3D" type="CharacterBody3D" parent="Player"]
+script = ExtResource("2_ks6rv")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Player/RigidBody3D"]
-mesh = SubResource("CapsuleMesh_fw86u")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player/RigidBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player/CharacterBody3D"]
 shape = SubResource("CapsuleShape3D_nek2g")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player/CharacterBody3D"]
+mesh = SubResource("CapsuleMesh_fw86u")
+skeleton = NodePath("")
+
+[node name="OrbitCamera" type="Node3D" parent="Player/CharacterBody3D"]
+
+[node name="Camera3D" type="Camera3D" parent="Player/CharacterBody3D/OrbitCamera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00309181, 0.00878096, 3.99993)
 
 [node name="Lighting" type="Node3D" parent="."]
 
