@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://cqc17hoh2awcr"]
+[gd_scene load_steps=10 format=3 uid="uid://cqc17hoh2awcr"]
 
 [ext_resource type="Texture2D" uid="uid://sohn2q70u6a8" path="res://Assets/Textures/debug.png" id="1_85avr"]
 [ext_resource type="Script" path="res://Scripts/Player_Control.gd" id="2_ks6rv"]
+[ext_resource type="PackedScene" uid="uid://cc0chwxocipsn" path="res://Assets/Models/Box_Platform.res" id="2_xilf2"]
 [ext_resource type="Script" path="res://Scripts/Camera_Control.gd" id="3_rn5nj"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wl6i5"]
@@ -23,6 +24,9 @@ size = Vector3(30, 1, 30)
 
 [node name="LevelGeometry" type="Node3D" parent="."]
 
+[node name="GroundPlatform2" parent="LevelGeometry" instance=ExtResource("2_xilf2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.364, 0, 3.00511)
+
 [node name="GroundPlatform1" type="StaticBody3D" parent="LevelGeometry"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="LevelGeometry/GroundPlatform1"]
@@ -31,6 +35,12 @@ mesh = SubResource("BoxMesh_xylpl")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LevelGeometry/GroundPlatform1"]
 shape = SubResource("BoxShape3D_thkgu")
+
+[node name="GroundPlatform" parent="LevelGeometry" instance=ExtResource("2_xilf2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.4885, 0.0720496, 0)
+
+[node name="GroundPlatform3" parent="LevelGeometry" instance=ExtResource("2_xilf2")]
+transform = Transform3D(0.952263, 0.30528, 0, -0.30528, 0.952263, 0, 0, 0, 1, -25.0329, 0.677686, -5.26614)
 
 [node name="Player" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.18751, 0)
