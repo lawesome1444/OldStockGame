@@ -26,14 +26,20 @@ func _physics_process(delta):
 		# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
+		
+		# Handle long-jump
+	if Input.is_action_just_pressed("long_jump") and is_on_floor():
+		velocity.y = 3
+		velocity.x = direction.x * 15
+		velocity.z = direction.z * 15
 	
 	## Handle Acceleration and Deceleration
 	if direction:
-		velocity.x = move_toward(velocity.x, direction.x * SPEED, SPEED)
-		velocity.z = move_toward(velocity.z, direction.z * SPEED, SPEED)
+		velocity.x = move_toward(velocity.x, direction.x * SPEED, 15 * delta)
+		velocity.z = move_toward(velocity.z, direction.z * SPEED, 15 * delta)
 	else:
-		velocity.x = move_toward(velocity.x, 0, decelerate_player())
-		velocity.z = move_toward(velocity.z, 0, decelerate_player())
+		velocity.x = move_toward(velocity.x, 0, decelerate_player() * delta)
+		velocity.z = move_toward(velocity.z, 0, decelerate_player() * delta)
 	
 	
 	move_and_slide()
@@ -41,6 +47,6 @@ func _physics_process(delta):
 #Calculate Deceleration
 func decelerate_player():
 	if is_on_floor():
-		return 2
+		return 20
 	else:
-		return 0.1
+		return 1
