@@ -53,7 +53,7 @@ func _physics_process(delta):
 		
 		
 		# Handle long-jump
-	if Input.is_action_just_pressed("long_jump") and is_on_floor():
+	if Input.is_action_just_pressed("jump") and Input.is_action_pressed("duck") and is_on_floor():
 		velocity.y = 3
 		velocity.x = direction.x * 15
 		velocity.z = direction.z * 15

@@ -1,7 +1,8 @@
 extends Node3D
 
 # Speed of camera rotation
-var rotation_speed = 0.1
+var mouse_speed = 0.1
+var controller_speed = 150
 
 var player_node : CharacterBody3D
 
@@ -27,16 +28,20 @@ func _input(event):
 	if event is InputEventMouseMotion:
 		# Get the relative motion of the mouse
 		var mouse_motion = event.relative
+		rotate_camera(mouse_motion, mouse_speed)
+		
+		
+func _process(delta):
+	var controller_motion = Input.get_vector("camera_left", "camera_right", "camera_up", "camera_down") * delta
+	rotate_camera(controller_motion, controller_speed)
+	pass
 
-		# Rotate the camera around the target node based on mouse motion
-		rotate_camera(mouse_motion)
-
-func rotate_camera(rotation):
+func rotate_camera(rotation, speed):
 	# Rotate the camera around the target node
 	var new_rotation = self.rotation_degrees
 	var new_player_rotation = player_node.global_rotation_degrees
-	new_player_rotation.y -= rotation.x * rotation_speed
-	new_rotation.x -= rotation.y * rotation_speed
+	new_player_rotation.y -= rotation.x * speed
+	new_rotation.x -= rotation.y * speed
 
 	# Clamp the rotation to avoid flipping the camera
 	new_rotation.x = clamp(new_rotation.x, -89, 89)
@@ -44,5 +49,3 @@ func rotate_camera(rotation):
 	# Apply the new rotation to the camera
 	self.rotation_degrees.x = new_rotation.x
 	player_node.global_rotation_degrees.y = new_player_rotation.y
-	
-	#
