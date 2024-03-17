@@ -4,6 +4,7 @@ extends CharacterBody3D
 const SPEED = 6.25
 const JUMP_VELOCITY = 4.5
 var jumping
+var walltest
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -14,6 +15,8 @@ var camera
 func _ready():
 	# Import camera
 	camera = get_node("./OrbitCamera")
+	
+	walltest = get_node("../../LevelGeometry/WallKickTest")
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -44,6 +47,15 @@ func _physics_process(delta):
 		velocity.y = 3
 		velocity.x = direction.x * 15
 		velocity.z = direction.z * 15
+		
+		# Handle Wall Kicks
+	if Input.is_action_just_pressed("jump") and is_on_wall() and not is_on_floor():
+		velocity.y = 5
+		velocity.x = direction.x * -7.5
+		velocity.z = direction.z * -7.5
+		var playerCor = Vector2(self.position.x, self.position.z)
+		var wallcor = Vector2(walltest.global_position.x, walltest.global_position.z)
+		print(playerCor.angle_to_point(wallcor))
 	
 	## Handle Acceleration and Deceleration
 	if direction:

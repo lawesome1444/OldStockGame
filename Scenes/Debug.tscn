@@ -24,23 +24,31 @@ size = Vector3(30, 1, 30)
 
 [node name="LevelGeometry" type="Node3D" parent="."]
 
-[node name="GroundPlatform2" parent="LevelGeometry" instance=ExtResource("2_xilf2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.364, 0, 3.00511)
+[node name="BaseFloor" type="StaticBody3D" parent="LevelGeometry"]
 
-[node name="GroundPlatform1" type="StaticBody3D" parent="LevelGeometry"]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="LevelGeometry/GroundPlatform1"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LevelGeometry/BaseFloor"]
 material_override = SubResource("StandardMaterial3D_wl6i5")
 mesh = SubResource("BoxMesh_xylpl")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="LevelGeometry/GroundPlatform1"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LevelGeometry/BaseFloor"]
 shape = SubResource("BoxShape3D_thkgu")
 
-[node name="GroundPlatform" parent="LevelGeometry" instance=ExtResource("2_xilf2")]
+[node name="DebugIsle" type="Node3D" parent="LevelGeometry"]
+
+[node name="DebugIsle1" parent="LevelGeometry/DebugIsle" instance=ExtResource("2_xilf2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.4885, 0.0720496, 0)
 
-[node name="GroundPlatform3" parent="LevelGeometry" instance=ExtResource("2_xilf2")]
+[node name="DebugIsle2" parent="LevelGeometry/DebugIsle" instance=ExtResource("2_xilf2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.364, 0, 3.00511)
+
+[node name="DebugIsle3" parent="LevelGeometry/DebugIsle" instance=ExtResource("2_xilf2")]
 transform = Transform3D(0.952263, 0.30528, 0, -0.30528, 0.952263, 0, 0, 0, 1, -25.0329, 0.677686, -5.26614)
+
+[node name="WallKickTest" parent="LevelGeometry" groups=["Kickable_Walls"] instance=ExtResource("2_xilf2")]
+transform = Transform3D(0.775, 0, 0, 0, 6.085, 0, 0, 0, 1, 3.33408, 6.52297, 13.5627)
+
+[node name="WallKickTest2" parent="LevelGeometry" groups=["Kickable_Walls"] instance=ExtResource("2_xilf2")]
+transform = Transform3D(0.775, 0, 0, 0, 6.085, 0, 0, 0, 1, -4.17677, 6.52297, 13.5627)
 
 [node name="Player" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.18751, 0)
@@ -63,6 +71,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00309181, 0.00878096, 3.99
 
 [node name="Lighting" type="Node3D" parent="."]
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Lighting"]
+[node name="MainSun" type="DirectionalLight3D" parent="Lighting"]
 transform = Transform3D(0.707107, -0.612372, 0.353553, 0, 0.5, 0.866025, -0.707107, -0.612372, 0.353553, 15, 30, 15)
+shadow_enabled = true
+
+[node name="WallKickLight" type="DirectionalLight3D" parent="Lighting"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 18.8593, 14.8814)
+light_color = Color(0.694118, 0.498039, 0.219608, 1)
+light_energy = 0.5
 shadow_enabled = true
