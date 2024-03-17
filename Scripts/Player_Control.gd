@@ -3,6 +3,7 @@ extends CharacterBody3D
 
 const SPEED = 6.25
 const JUMP_VELOCITY = 4.5
+var jumping
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -18,6 +19,10 @@ func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta
+		
+	#Check to see if the player is on the ground
+	if is_on_floor():
+		jumping = false
 
 	# Get the input direction
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_backwards")
@@ -26,6 +31,13 @@ func _physics_process(delta):
 		# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
+		jumping = true
+		
+		# Handle Jump Cancel
+	if Input.is_action_just_released("jump") and jumping == true and velocity.y > 0:
+		velocity.y = 0
+		jumping = false
+		
 		
 		# Handle long-jump
 	if Input.is_action_just_pressed("long_jump") and is_on_floor():
