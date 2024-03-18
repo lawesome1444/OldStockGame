@@ -1,9 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://cqc17hoh2awcr"]
+[gd_scene load_steps=7 format=3 uid="uid://cqc17hoh2awcr"]
 
 [ext_resource type="Texture2D" uid="uid://sohn2q70u6a8" path="res://Assets/Textures/debug.png" id="1_85avr"]
-[ext_resource type="Script" path="res://Scripts/Player_Control.gd" id="2_ks6rv"]
 [ext_resource type="PackedScene" uid="uid://cc0chwxocipsn" path="res://Assets/Models/Box_Platform.res" id="2_xilf2"]
-[ext_resource type="Script" path="res://Scripts/Camera_Control.gd" id="3_rn5nj"]
+[ext_resource type="PackedScene" uid="uid://62ae7w3711pj" path="res://Assets/Models/player.res" id="3_mwxfq"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wl6i5"]
 albedo_texture = ExtResource("1_85avr")
@@ -15,10 +14,6 @@ size = Vector3(30, 1, 30)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_thkgu"]
 size = Vector3(30, 1, 30)
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_nek2g"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_fw86u"]
 
 [node name="DebugScene" type="Node3D"]
 
@@ -55,24 +50,7 @@ transform = Transform3D(0.775, 0, 0, 0, 6.085, 0, 0, 0, 2.075, -4.17677, 6.52297
 [node name="GoalPlat" parent="LevelGeometry/WallKickGeo" instance=ExtResource("2_xilf2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.469026, 11.5912, 24.515)
 
-[node name="Player" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.18751, 0)
-
-[node name="CharacterBody3D" type="CharacterBody3D" parent="Player"]
-script = ExtResource("2_ks6rv")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player/CharacterBody3D"]
-shape = SubResource("CapsuleShape3D_nek2g")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Player/CharacterBody3D"]
-mesh = SubResource("CapsuleMesh_fw86u")
-skeleton = NodePath("")
-
-[node name="OrbitCamera" type="Node3D" parent="Player/CharacterBody3D"]
-script = ExtResource("3_rn5nj")
-
-[node name="Camera3D" type="Camera3D" parent="Player/CharacterBody3D/OrbitCamera"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00309181, 0.00878096, 3.99993)
+[node name="Player" parent="." instance=ExtResource("3_mwxfq")]
 
 [node name="Lighting" type="Node3D" parent="."]
 

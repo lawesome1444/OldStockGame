@@ -4,11 +4,13 @@ extends Node3D
 var mouse_speed = 0.1
 var controller_speed = 150
 
+# Specifying that the player_node variable is CharacterBody3D
 var player_node : CharacterBody3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	
+	# Set the characterbody3d as the player's one
 	player_node = get_node("../../CharacterBody3D")
 	# Lock the mouse to the window
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -30,7 +32,7 @@ func _input(event):
 		var mouse_motion = event.relative
 		rotate_camera(mouse_motion, mouse_speed)
 		
-		
+# Check each frame for controller camera movement. Apply the intensity and multiply by time delta to keep sensititivy consistent between framerates
 func _process(delta):
 	var controller_motion = Input.get_vector("camera_left", "camera_right", "camera_up", "camera_down") * delta
 	rotate_camera(controller_motion, controller_speed)

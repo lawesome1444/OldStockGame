@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=3 uid="uid://dvdmk1uod5qy5"]
+
+[ext_resource type="PackedScene" uid="uid://cc0chwxocipsn" path="res://Assets/Models/Box_Platform.res" id="1_obkhd"]
+[ext_resource type="PackedScene" uid="uid://62ae7w3711pj" path="res://Assets/Models/player.res" id="2_x2k4a"]
+
+[node name="Level1" type="Node3D"]
+
+[node name="Player" parent="." instance=ExtResource("2_x2k4a")]
+
+[node name="LevelGeometry" type="Node3D" parent="."]
+
+[node name="GroundPlatform" parent="LevelGeometry" instance=ExtResource("1_obkhd")]
+
+[node name="GUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="xSpeed" type="RichTextLabel" parent="GUI"]
+layout_mode = 0
+offset_right = 387.0
+offset_bottom = 26.0
+
+[node name="ySpeed" type="RichTextLabel" parent="GUI"]
+layout_mode = 0
+offset_top = 22.0
+offset_right = 390.0
+offset_bottom = 48.0
+
+[node name="zSpeed" type="RichTextLabel" parent="GUI"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 45.0
+offset_right = 391.0
+offset_bottom = 71.0
+
+[node name="Rotation" type="RichTextLabel" parent="GUI"]
+layout_mode = 0
+offset_top = 86.0
+offset_right = 392.0
+offset_bottom = 112.0
