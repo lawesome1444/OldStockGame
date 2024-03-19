@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://cqc17hoh2awcr"]
+[gd_scene load_steps=9 format=3 uid="uid://cqc17hoh2awcr"]
 
 [ext_resource type="Texture2D" uid="uid://sohn2q70u6a8" path="res://Assets/Textures/debug.png" id="1_85avr"]
+[ext_resource type="Script" path="res://Scripts/GameMaster.gd" id="1_ubhnu"]
 [ext_resource type="PackedScene" uid="uid://cc0chwxocipsn" path="res://Assets/Models/Box_Platform.res" id="2_xilf2"]
 [ext_resource type="PackedScene" uid="uid://62ae7w3711pj" path="res://Assets/Models/player.res" id="3_mwxfq"]
 
@@ -15,7 +16,11 @@ size = Vector3(30, 1, 30)
 [sub_resource type="BoxShape3D" id="BoxShape3D_thkgu"]
 size = Vector3(30, 1, 30)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_tsg2h"]
+size = Vector3(3, 3, 3)
+
 [node name="DebugScene" type="Node3D"]
+script = ExtResource("1_ubhnu")
 
 [node name="LevelGeometry" type="Node3D" parent="."]
 
@@ -49,6 +54,17 @@ transform = Transform3D(0.775, 0, 0, 0, 6.085, 0, 0, 0, 2.075, -4.17677, 6.52297
 
 [node name="GoalPlat" parent="LevelGeometry/WallKickGeo" instance=ExtResource("2_xilf2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.469026, 11.5912, 24.515)
+
+[node name="Area3D" type="Area3D" parent="LevelGeometry"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.4405, 2.22889, -13.846)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LevelGeometry/Area3D"]
+shape = SubResource("BoxShape3D_tsg2h")
+
+[node name="Label3D" type="Label3D" parent="LevelGeometry/Area3D"]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 0, 0, 0)
+text = "Return to Menu"
+font_size = 80
 
 [node name="Player" parent="." instance=ExtResource("3_mwxfq")]
 
@@ -93,3 +109,5 @@ layout_mode = 0
 offset_top = 86.0
 offset_right = 392.0
 offset_bottom = 112.0
+
+[connection signal="body_entered" from="LevelGeometry/Area3D" to="." method="_on_level_completion" binds= [9001]]

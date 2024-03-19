@@ -15,6 +15,7 @@ func _ready():
 	# Lock the mouse to the window
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
+	
 	pass # Replace with function body.
 
 func _input(event):

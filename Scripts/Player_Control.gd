@@ -5,6 +5,9 @@ const SPEED = 6.25
 const JUMP_VELOCITY = 7.5
 var jumping
 
+# Sets the player's current checkpoint so the game knows where to respawn them
+var checkpoint : String
+
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 ## Create a camera variable
@@ -26,6 +29,9 @@ func _ready():
 	ySpeed = get_node("../../GUI/ySpeed")
 	zSpeed = get_node("../../GUI/zSpeed")
 	rotationgui = get_node("../../GUI/Rotation")
+	
+	# Set the player's checkpoint to the beginning of a level
+	checkpoint = "Level_Start"
 	
 
 func _physics_process(delta):
@@ -54,7 +60,7 @@ func _physics_process(delta):
 		
 		# Handle long-jump
 	if Input.is_action_just_pressed("jump") and Input.is_action_pressed("duck") and is_on_floor():
-		velocity.y = 4
+		velocity.y = 4.5
 		velocity.x = direction.x * 20
 		velocity.z = direction.z * 20
 		
@@ -63,8 +69,8 @@ func _physics_process(delta):
 		# Give the player some height
 		velocity.y = 5
 		# Then bounce them off the wall depending on what side of the wall they are facing
-		velocity.x = get_wall_normal().x * 7.5
-		velocity.z = get_wall_normal().z * 7.5
+		velocity.x = get_wall_normal().x * 10
+		velocity.z = get_wall_normal().z * 10
 	
 	## Handle Acceleration and Deceleration
 	if direction:
@@ -89,3 +95,11 @@ func decelerate_player():
 		return 20
 	else:
 		return 5
+
+func _on_trigger_enter(body, section):
+	if body is CharacterBody3D:
+		if typeof(section) == TYPE_VECTOR3:
+			global_position = section
+		if typeof(section) == TYPE_STRING:
+			# Update the player's checkpoint
+			checkpoint = section
