@@ -1,15 +1,84 @@
-[gd_scene load_steps=3 format=3 uid="uid://dvdmk1uod5qy5"]
+[gd_scene load_steps=5 format=3 uid="uid://dvdmk1uod5qy5"]
 
-[ext_resource type="PackedScene" uid="uid://cc0chwxocipsn" path="res://Assets/Models/Box_Platform.res" id="1_obkhd"]
 [ext_resource type="PackedScene" uid="uid://62ae7w3711pj" path="res://Assets/Models/player.res" id="2_x2k4a"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_456r8"]
+
+[sub_resource type="Sky" id="Sky_asu23"]
+sky_material = SubResource("ProceduralSkyMaterial_456r8")
+
+[sub_resource type="Environment" id="Environment_apkmu"]
+background_mode = 2
+sky = SubResource("Sky_asu23")
 
 [node name="Level1" type="Node3D"]
 
 [node name="Player" parent="." instance=ExtResource("2_x2k4a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.18751, 11)
 
 [node name="LevelGeometry" type="Node3D" parent="."]
 
-[node name="GroundPlatform" parent="LevelGeometry" instance=ExtResource("1_obkhd")]
+[node name="BoxOut" type="Node3D" parent="LevelGeometry"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="LevelGeometry/BoxOut"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+use_collision = true
+size = Vector3(20, 1, 30)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="LevelGeometry/BoxOut"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 10, 1)
+use_collision = true
+size = Vector3(1, 21, 30)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="LevelGeometry/BoxOut"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 10, -7)
+use_collision = true
+size = Vector3(1, 21, 46)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="LevelGeometry/BoxOut"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.5, 10, -14)
+use_collision = true
+size = Vector3(63, 21, 1)
+
+[node name="CSGBox3D11" type="CSGBox3D" parent="LevelGeometry/BoxOut"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.5, 10, -30)
+use_collision = true
+size = Vector3(69, 21, 1)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="LevelGeometry/BoxOut"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 1.5, 5)
+use_collision = true
+size = Vector3(8, 2, 5)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="LevelGeometry/BoxOut"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 2.5, 0)
+use_collision = true
+size = Vector3(8, 4, 5)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="LevelGeometry/BoxOut"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, -11)
+use_collision = true
+size = Vector3(19, 6, 6)
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="LevelGeometry/BoxOut"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.5, -22)
+use_collision = true
+size = Vector3(19, 10, 16)
+
+[node name="CSGBox3D12" type="CSGBox3D" parent="LevelGeometry/BoxOut"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 4.5, -22)
+use_collision = true
+size = Vector3(5, 10, 16)
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="LevelGeometry/BoxOut"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5, 8, -11)
+use_collision = true
+size = Vector3(6, 3, 6)
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="LevelGeometry/BoxOut"]
+transform = Transform3D(0.866025, 0.5, 0, -0.5, 0.866025, 0, 0, 0, 1, -1.65134, 6.69996, -11)
+use_collision = true
+size = Vector3(6, 3, 6)
 
 [node name="GUI" type="Control" parent="."]
 layout_mode = 3
@@ -40,3 +109,9 @@ layout_mode = 0
 offset_top = 86.0
 offset_right = 392.0
 offset_bottom = 112.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 21, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_apkmu")

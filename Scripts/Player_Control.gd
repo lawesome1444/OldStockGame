@@ -2,7 +2,7 @@ extends CharacterBody3D
 
 
 const SPEED = 6.25
-const JUMP_VELOCITY = 4.5
+const JUMP_VELOCITY = 7.5
 var jumping
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -48,15 +48,15 @@ func _physics_process(delta):
 		
 		# Handle Jump Cancel
 	if Input.is_action_just_released("jump") and jumping == true and velocity.y > 0:
-		velocity.y = 0
+		velocity.y = 1
 		jumping = false
 		
 		
 		# Handle long-jump
 	if Input.is_action_just_pressed("jump") and Input.is_action_pressed("duck") and is_on_floor():
-		velocity.y = 3
-		velocity.x = direction.x * 15
-		velocity.z = direction.z * 15
+		velocity.y = 4
+		velocity.x = direction.x * 20
+		velocity.z = direction.z * 20
 		
 		# Handle Wall Kicks
 	if Input.is_action_just_pressed("jump") and is_on_wall() and not is_on_floor():
