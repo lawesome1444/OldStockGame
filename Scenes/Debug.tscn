@@ -110,4 +110,13 @@ offset_top = 86.0
 offset_right = 392.0
 offset_bottom = 112.0
 
+[node name="GridContainer" type="GridContainer" parent="GUI"]
+offset_right = 1152.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="GUI/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+horizontal_alignment = 1
+
 [connection signal="body_entered" from="LevelGeometry/Area3D" to="." method="_on_level_completion" binds= [9001]]
