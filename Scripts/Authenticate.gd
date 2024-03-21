@@ -10,27 +10,24 @@ func _ready():
 	Firebase.Auth.login_failed.connect(on_login_failed)
 	Firebase.Auth.signup_failed.connect(on_signup_failed)
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
-
 func _on_login_button_pressed():
-	# Store
+	# Grab the Email and Password from the entry fields
 	var email = %EmailInput.text
 	var password = %PasswordInput.text
+	# Attempt to login to Firebase
 	Firebase.Auth.login_with_email_and_password(email, password)
 	%StateLabel.text = "Logging in..."
 
 func _on_signup_button_pressed():
+	# Grab the Email and Password from the entry fields
 	var email = %EmailInput.text
 	var password = %PasswordInput.text
+	# Attempt to sign up to Firebase
 	Firebase.Auth.signup_with_email_and_password(email, password)
 	%StateLabel.text = "Signing up..."
 	pass # Replace with function body.
 
-
+# If logging in / signing up was successful, display the appropriate message
 func on_login_succeeded(res):
 	print(res)
 	%StateLabel.text = "Login succeeded!"
@@ -39,6 +36,7 @@ func on_signup_succeeded(res):
 	print(res)
 	%StateLabel.text = "Sign Up succeeded!"
 	
+# If logging in / signing up was unsuccessful, display the appropriate message
 func on_login_failed(res, mes):
 	print(res)
 	print(mes)
