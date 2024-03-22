@@ -17,12 +17,12 @@ size = Vector3(16.4194, 5, 12.0732)
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_456r8"]
 
-[sub_resource type="Sky" id="Sky_asu23"]
+[sub_resource type="Sky" id="Sky_ux57t"]
 sky_material = SubResource("ProceduralSkyMaterial_456r8")
 
 [sub_resource type="Environment" id="Environment_apkmu"]
 background_mode = 2
-sky = SubResource("Sky_asu23")
+sky = SubResource("Sky_ux57t")
 
 [node name="Level1" type="Node3D"]
 script = ExtResource("1_5xg8y")

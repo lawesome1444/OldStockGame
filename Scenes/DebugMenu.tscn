@@ -35,6 +35,10 @@ text = "Debug"
 layout_mode = 2
 text = "Level 1"
 
+[node name="Button3" type="Button" parent="GridContainer"]
+layout_mode = 2
+text = "Level 2"
+
 [node name="Authentication" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 7
@@ -103,7 +107,8 @@ text = "Log In"
 layout_mode = 2
 text = "Sign Up"
 
-[connection signal="pressed" from="GridContainer/Button" to="." method="_menubutton_debugscene"]
-[connection signal="pressed" from="GridContainer/Button2" to="." method="_menubutton_level1"]
+[connection signal="pressed" from="GridContainer/Button" to="." method="_debugmenu_buttons" binds= ["res://Scenes/Debug.tscn"]]
+[connection signal="pressed" from="GridContainer/Button2" to="." method="_debugmenu_buttons" binds= ["res://Scenes/Level1.tscn"]]
+[connection signal="pressed" from="GridContainer/Button3" to="." method="_debugmenu_buttons" binds= ["res://Scenes/Level2.tscn"]]
 [connection signal="pressed" from="Authentication/VBoxContainer/Login" to="Authentication" method="_on_login_button_pressed"]
 [connection signal="pressed" from="Authentication/VBoxContainer/SignUp" to="Authentication" method="_on_signup_button_pressed"]
