@@ -1,7 +1,46 @@
-[gd_scene load_steps=6 format=3 uid="uid://bvpx7ams4mvpo"]
+[gd_scene load_steps=13 format=3 uid="uid://bvpx7ams4mvpo"]
 
 [ext_resource type="PackedScene" uid="uid://62ae7w3711pj" path="res://Assets/Models/player.res" id="1_00u37"]
 [ext_resource type="Script" path="res://Scripts/GameMaster.gd" id="1_b7saw"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_7ykb7"]
+size = Vector3(5, 1, 5)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_6wv2j"]
+points = PackedVector3Array(2.53919, 0.571429, 2.53869, -2.35782, -0.5, -2.35735, -2.35782, -0.5, 2.35735, -2.53919, 0.571429, -2.53869, 2.35782, -0.5, -2.35735, -2.53919, 0.571429, 2.53869, 2.53919, 0.571429, -2.53869, 2.35782, -0.5, 2.35735)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_6knr8"]
+points = PackedVector3Array(2.53919, 0.571429, 2.53869, -2.35782, -0.5, -2.35735, -2.35782, -0.5, 2.35735, -2.53919, 0.571429, -2.53869, 2.35782, -0.5, -2.35735, -2.53919, 0.571429, 2.53869, 2.53919, 0.571429, -2.53869, 2.35782, -0.5, 2.35735)
+
+[sub_resource type="Animation" id="Animation_wt8rn"]
+resource_name = "movingPlat"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, -4, 11, -29, 1, 1, -4, 11, -29, 2, 1, -4, 6, -29, 3, 1, -4, 6, -29, 4, 1, -4, 11, -29)
+tracks/1/type = "position_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../AnimatableBody3D2")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0.1, 1, 3, 1, -29, 1, 1, 3, 1, -29, 2, 1, 3, 6, -29, 3, 1, 3, 6, -29, 3.9, 1, 3, 1, -29)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_o7fyw"]
+_data = {
+"movingPlat": SubResource("Animation_wt8rn")
+}
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jp88r"]
+size = Vector3(7, 2, 26)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2s6bf"]
+size = Vector3(31, 2, 34)
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_nc2uf"]
 
@@ -57,25 +96,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 18, -32)
 use_collision = true
 size = Vector3(5, 3, 1)
 
-[node name="CSGBox3D6" type="CSGBox3D" parent="LevelGeometry"]
-transform = Transform3D(1, 0, 0, 0, 0.866025, -0.5, 0, 0.5, 0.866025, -4, 5.56461, -17.2428)
-use_collision = true
-size = Vector3(5, 1, 22)
-
-[node name="CSGBox3D7" type="CSGBox3D" parent="LevelGeometry"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 11, -29)
-use_collision = true
-size = Vector3(5, 1, 5)
-
-[node name="CSGBox3D8" type="CSGBox3D" parent="LevelGeometry"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, -29)
-use_collision = true
-size = Vector3(5, 1, 5)
-
 [node name="CSGBox3D16" type="CSGBox3D" parent="LevelGeometry"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 11, -60.5)
 use_collision = true
 size = Vector3(5, 1, 8)
+
+[node name="CSGBox3D25" type="CSGBox3D" parent="LevelGeometry"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 11, -34)
+use_collision = true
+size = Vector3(5, 1, 3)
 
 [node name="CSGBox3D21" type="CSGBox3D" parent="LevelGeometry"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 11, -94.5)
@@ -126,28 +155,71 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 15, -48.5)
 use_collision = true
 size = Vector3(1, 9, 32)
 
-[node name="CSGBox3D12" type="CSGBox3D" parent="."]
+[node name="CSGBox3D12" type="CSGBox3D" parent="LevelGeometry"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 14.5, -64)
 use_collision = true
 size = Vector3(12, 10, 1)
 
-[node name="CSGBox3D14" type="CSGBox3D" parent="."]
+[node name="CSGBox3D22" type="CSGBox3D" parent="LevelGeometry"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 14.5, -97)
 use_collision = true
 size = Vector3(13, 10, 1)
 
-[node name="CSGBox3D13" type="CSGBox3D" parent="."]
+[node name="CSGBox3D23" type="CSGBox3D" parent="LevelGeometry"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.5, 14.5, -64)
 use_collision = true
 size = Vector3(12, 10, 1)
 
-[node name="CSGBox3D15" type="CSGBox3D" parent="."]
+[node name="CSGBox3D24" type="CSGBox3D" parent="LevelGeometry"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 14.5, -97)
 use_collision = true
 size = Vector3(13, 10, 1)
 
 [node name="Player" parent="." instance=ExtResource("1_00u37")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.40679, 13.8834, -61.9871)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.40679, 2.8834, -3.9871)
+
+[node name="MovingGeometry" type="Node3D" parent="."]
+
+[node name="AnimatableBody3D" type="AnimatableBody3D" parent="MovingGeometry"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 11, -29)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingGeometry/AnimatableBody3D"]
+mesh = SubResource("BoxMesh_7ykb7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingGeometry/AnimatableBody3D"]
+shape = SubResource("ConvexPolygonShape3D_6wv2j")
+
+[node name="AnimatableBody3D2" type="AnimatableBody3D" parent="MovingGeometry"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1, -29)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingGeometry/AnimatableBody3D2"]
+mesh = SubResource("BoxMesh_7ykb7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingGeometry/AnimatableBody3D2"]
+shape = SubResource("ConvexPolygonShape3D_6knr8")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MovingGeometry"]
+root_node = NodePath("../AnimatableBody3D")
+libraries = {
+"": SubResource("AnimationLibrary_o7fyw")
+}
+autoplay = "movingPlat"
+
+[node name="Hazards" type="Node3D" parent="."]
+
+[node name="Area3D2" type="Area3D" parent="Hazards"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 9, -53)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hazards/Area3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 7.5)
+shape = SubResource("BoxShape3D_jp88r")
+
+[node name="Area3D" type="Area3D" parent="Hazards"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 9, -82)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hazards/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 1.5)
+shape = SubResource("BoxShape3D_2s6bf")
 
 [node name="GUI" type="Control" parent="."]
 layout_mode = 3
@@ -195,3 +267,8 @@ shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_87pxr")
+
+[connection signal="body_entered" from="Hazards/Area3D2" to="Player/CharacterBody3D" method="_on_trigger_enter" binds= [Vector3(-4, 13.5, -34)]]
+[connection signal="body_entered" from="Hazards/Area3D" to="Player/CharacterBody3D" method="_on_trigger_enter" binds= [Vector3(-4, 13.5, -60.5)]]
+
+[editable path="Player"]
