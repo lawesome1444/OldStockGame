@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://cqc17hoh2awcr"]
+[gd_scene load_steps=15 format=3 uid="uid://cqc17hoh2awcr"]
 
 [ext_resource type="Texture2D" uid="uid://sohn2q70u6a8" path="res://Assets/Textures/debug.png" id="1_85avr"]
 [ext_resource type="Script" path="res://Scripts/GameMaster.gd" id="1_ubhnu"]
 [ext_resource type="PackedScene" uid="uid://cc0chwxocipsn" path="res://Assets/Models/Box_Platform.res" id="2_xilf2"]
 [ext_resource type="PackedScene" uid="uid://62ae7w3711pj" path="res://Assets/Models/player.res" id="3_mwxfq"]
+[ext_resource type="Script" path="res://Scripts/DebugSpinningHazard.gd" id="4_4fv0q"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wl6i5"]
 albedo_texture = ExtResource("1_85avr")
@@ -18,6 +19,24 @@ size = Vector3(30, 1, 30)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tsg2h"]
 size = Vector3(3, 3, 3)
+
+[sub_resource type="Gradient" id="Gradient_dygvk"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_64rp0"]
+gradient = SubResource("Gradient_dygvk")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gsj7p"]
+emission_enabled = true
+emission = Color(1, 0.592157, 0.298039, 1)
+emission_texture = SubResource("GradientTexture1D_64rp0")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1rh64"]
+emission_enabled = true
+emission = Color(1, 0.592157, 0.298039, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rqgb1"]
+emission_enabled = true
+emission = Color(1, 0.592157, 0.298039, 1)
 
 [node name="DebugScene" type="Node3D"]
 script = ExtResource("1_ubhnu")
@@ -66,6 +85,29 @@ transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 
 text = "Return to Menu"
 font_size = 80
 
+[node name="FireHazard" type="Node3D" parent="LevelGeometry"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 7, 0)
+script = ExtResource("4_4fv0q")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="LevelGeometry/FireHazard"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+height = 1.0
+
+[node name="CSGBox3D" type="CSGBox3D" parent="LevelGeometry/FireHazard/CSGCylinder3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2, 0, -0.000674605)
+material_override = SubResource("StandardMaterial3D_gsj7p")
+size = Vector3(1, 1, 3.70886)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="LevelGeometry/FireHazard/CSGCylinder3D"]
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 1, 0, -2.00067)
+material_override = SubResource("StandardMaterial3D_1rh64")
+size = Vector3(1, 1, 3.70886)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="LevelGeometry/FireHazard/CSGCylinder3D"]
+transform = Transform3D(-0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, -0.866025, 1, 0, 1.99933)
+material_override = SubResource("StandardMaterial3D_rqgb1")
+size = Vector3(1, 1, 3.70886)
+
 [node name="Player" parent="." instance=ExtResource("3_mwxfq")]
 
 [node name="Lighting" type="Node3D" parent="."]
@@ -111,6 +153,7 @@ offset_right = 392.0
 offset_bottom = 112.0
 
 [node name="GridContainer" type="GridContainer" parent="GUI"]
+layout_mode = 0
 offset_right = 1152.0
 offset_bottom = 40.0
 
