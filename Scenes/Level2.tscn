@@ -1,7 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://bvpx7ams4mvpo"]
+[gd_scene load_steps=15 format=3 uid="uid://bvpx7ams4mvpo"]
 
 [ext_resource type="PackedScene" uid="uid://62ae7w3711pj" path="res://Assets/Models/player.res" id="1_00u37"]
 [ext_resource type="Script" path="res://Scripts/GameMaster.gd" id="1_b7saw"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7syda"]
+size = Vector3(4.91943, 5.92725, 5)
 
 [sub_resource type="BoxMesh" id="BoxMesh_7ykb7"]
 size = Vector3(5, 1, 5)
@@ -36,6 +39,9 @@ _data = {
 "movingPlat": SubResource("Animation_wt8rn")
 }
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_4iqbk"]
+size = Vector3(5, 3, 5)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_jp88r"]
 size = Vector3(7, 2, 26)
 
@@ -53,6 +59,28 @@ sky = SubResource("Sky_r7yts")
 
 [node name="Level2" type="Node3D"]
 script = ExtResource("1_b7saw")
+
+[node name="Player" parent="." instance=ExtResource("1_00u37")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+
+[node name="CharacterBody3D" parent="Player" index="0"]
+checkpoint_list = [Vector3(0, 2.5, 0), Vector3(-4, 14, -60.5), Vector3(-4, 15, -95)]
+
+[node name="Checkpoints" type="Node3D" parent="."]
+
+[node name="Area3D" type="Area3D" parent="Checkpoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 12, -61)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Checkpoints/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00805664, 2.53638, 0.5)
+shape = SubResource("BoxShape3D_7syda")
+
+[node name="Area3D2" type="Area3D" parent="Checkpoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 12, -95)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Checkpoints/Area3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00805664, 2.53638, 0)
+shape = SubResource("BoxShape3D_7syda")
 
 [node name="LevelGeometry" type="Node3D" parent="."]
 
@@ -175,9 +203,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 14.5, -97)
 use_collision = true
 size = Vector3(13, 10, 1)
 
-[node name="Player" parent="." instance=ExtResource("1_00u37")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.40679, 2.8834, -3.9871)
-
 [node name="MovingGeometry" type="Node3D" parent="."]
 
 [node name="AnimatableBody3D" type="AnimatableBody3D" parent="MovingGeometry"]
@@ -206,6 +231,13 @@ libraries = {
 autoplay = "movingPlat"
 
 [node name="Hazards" type="Node3D" parent="."]
+
+[node name="Area3D3" type="Area3D" parent="Hazards"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, -2, -29)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hazards/Area3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0458567, 0)
+shape = SubResource("BoxShape3D_4iqbk")
 
 [node name="Area3D2" type="Area3D" parent="Hazards"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 9, -53)
@@ -268,7 +300,10 @@ shadow_enabled = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_87pxr")
 
-[connection signal="body_entered" from="Hazards/Area3D2" to="Player/CharacterBody3D" method="_on_trigger_enter" binds= [Vector3(-4, 13.5, -34)]]
-[connection signal="body_entered" from="Hazards/Area3D" to="Player/CharacterBody3D" method="_on_trigger_enter" binds= [Vector3(-4, 13.5, -60.5)]]
+[connection signal="body_entered" from="Checkpoints/Area3D" to="Player/CharacterBody3D" method="_on_checkpoint_reached" binds= [1]]
+[connection signal="body_entered" from="Checkpoints/Area3D2" to="Player/CharacterBody3D" method="_on_checkpoint_reached" binds= [2]]
+[connection signal="body_entered" from="Hazards/Area3D3" to="Player/CharacterBody3D" method="_on_player_death"]
+[connection signal="body_entered" from="Hazards/Area3D2" to="Player/CharacterBody3D" method="_on_player_death"]
+[connection signal="body_entered" from="Hazards/Area3D" to="Player/CharacterBody3D" method="_on_player_death"]
 
 [editable path="Player"]

@@ -5,8 +5,10 @@ const SPEED = 6.25
 const JUMP_VELOCITY = 7.5
 var jumping
 
+# Store all checkpoint coordinates in the level
+@export var checkpoint_list = []
 # Sets the player's current checkpoint so the game knows where to respawn them
-var checkpoint : String
+var checkpoint_current = 0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -29,9 +31,6 @@ func _ready():
 	ySpeed = get_node("../../GUI/ySpeed")
 	zSpeed = get_node("../../GUI/zSpeed")
 	rotationgui = get_node("../../GUI/Rotation")
-	
-	# Set the player's checkpoint to the beginning of a level
-	checkpoint = "Level_Start"
 	
 
 func _physics_process(delta):
@@ -96,10 +95,12 @@ func decelerate_player():
 	else:
 		return 5
 
-func _on_trigger_enter(body, section):
+# If the player dies, respawn them at the current checkpoint
+func _on_player_death(body):
 	if body is CharacterBody3D:
-		if typeof(section) == TYPE_VECTOR3:
-			global_position = section
-		if typeof(section) == TYPE_STRING:
-			# Update the player's checkpoint
-			checkpoint = section
+		global_position = checkpoint_list[checkpoint_current]
+
+# If the player hits a checkpoint, set the current checkpoint as it
+func _on_checkpoint_reached(body, checkpoint):
+	if body is CharacterBody3D:
+		checkpoint_current = checkpoint
