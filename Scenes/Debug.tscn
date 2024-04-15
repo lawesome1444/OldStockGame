@@ -8,6 +8,7 @@
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wl6i5"]
 albedo_texture = ExtResource("1_85avr")
+uv1_scale = Vector3(50, 50, 50)
 texture_filter = 0
 point_size = 13.9
 

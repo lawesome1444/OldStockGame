@@ -37,6 +37,8 @@ albedo_texture = ExtResource("4_0cj0c")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sii3s"]
 albedo_texture = ExtResource("3_vfp12")
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 4.96
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h280v"]
 albedo_texture = ExtResource("3_vfp12")
