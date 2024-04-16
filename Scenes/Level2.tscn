@@ -1,6 +1,6 @@
 [gd_scene load_steps=58 format=3 uid="uid://bvpx7ams4mvpo"]
 
-[ext_resource type="PackedScene" uid="uid://62ae7w3711pj" path="res://Assets/Models/player.res" id="1_00u37"]
+[ext_resource type="PackedScene" uid="uid://um25f3xdqck4" path="res://Assets/Models/player_test.res" id="1_00u37"]
 [ext_resource type="Script" path="res://Scripts/GameMaster.gd" id="1_b7saw"]
 [ext_resource type="Texture2D" uid="uid://cgdbs25mlg03v" path="res://Assets/Textures/labfloor.jpg" id="3_c16nj"]
 [ext_resource type="Texture2D" uid="uid://ceeuxev8bvncb" path="res://Assets/Textures/labwall.jpg" id="4_ac85k"]
@@ -394,6 +394,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.18751, -1)
 
 [node name="CharacterBody3D" parent="Player" index="0"]
 checkpoint_list = [Vector3(0, 2.5, 0), Vector3(-4, 14, -60.5), Vector3(-4, 15, -95)]
+
+[node name="RightArm" parent="Player/CharacterBody3D/OldStockbk2/OldStockBody" index="4"]
+transform = Transform3D(0.12941, -0.193185, 1.6199e-08, 0.482962, 0.0517639, -2.1111e-08, 3.23981e-08, 1.68888e-08, 0.25, -0.991295, 0.100138, -3.01458e-08)
 
 [node name="Checkpoints" type="Node3D" parent="."]
 
@@ -868,3 +871,4 @@ shape = SubResource("BoxShape3D_khjmx")
 [connection signal="body_entered" from="Area3D" to="." method="_on_level_completion" binds= [2]]
 
 [editable path="Player"]
+[editable path="Player/CharacterBody3D/OldStockbk2"]
