@@ -5,6 +5,9 @@ const SPEED = 6.25
 const JUMP_VELOCITY = 7.5
 var jumping
 
+# Animation player
+var animationTree: AnimationTree
+
 # Store all checkpoint coordinates in the level
 @export var checkpoint_list = []
 # Sets the player's current checkpoint so the game knows where to respawn them
@@ -32,22 +35,35 @@ func _ready():
 	zSpeed = get_node("../../GUI/zSpeed")
 	rotationgui = get_node("../../GUI/Rotation")
 	
+	#Get the animation player
+	animationTree = get_node("./AnimationTree")
+	#animationPlayer.play("idle", -1, 1.0, false)
 
 func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
+		# Start falling
+		animationTree.set("parameters/Blend2/blend_amount", 1)
+		# Add gravity
 		velocity.y -= gravity * delta
 		
 	#Check to see if the player is on the ground
 	if is_on_floor():
 		jumping = false
+		animationTree.set("parameters/Blend2/blend_amount", 0)
 
 	# Get the input direction
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_backwards")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	
+	#Set the blend of the animation depending on the axis inputted by the user
+	animationTree.set("parameters/BlendSpace2D/blend_position", input_dir)
+		
 		# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
+		# Set the blend to jump mode and play the jump animation
+		animationTree.set("parameters/Blend2/blend_amount", 1)
+		animationTree.set("parameters/OneShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 		velocity.y = JUMP_VELOCITY
 		jumping = true
 		
@@ -65,6 +81,10 @@ func _physics_process(delta):
 		
 		# Handle Wall Kicks
 	if Input.is_action_just_pressed("jump") and is_on_wall() and not is_on_floor():
+		# Play a jump animation
+		animationTree.set("parameters/Blend2/blend_amount", 1)
+		animationTree.set("parameters/OneShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+		
 		# Give the player some height
 		velocity.y = 5
 		# Then bounce them off the wall depending on what side of the wall they are facing
