@@ -30,7 +30,7 @@ func _on_level_completion(body, level):
 		match level:
 			1: currentLevel = "level1"
 			2: currentLevel = "level2"
-		# Save the time
+		# Save the time if the player is logged in
 		var auth = Firebase.Auth.auth
 		if auth && level < 100:
 			# Set the database collection target to the highscores collection
@@ -44,10 +44,15 @@ func _on_level_completion(body, level):
 			var data: Dictionary = {
 				currentLevel: time
 			}
-			# If the new time is faster (smaller) than the previous, update the best time for the appropriate level
-			if time < cloud_data.doc_fields[currentLevel]:
+			# If the player doesn't have a level completion time, do not run the completion time comparison
+			# (Because it doesn't exist yet!)
+			if cloud_data:
+				# If the new time is faster (smaller) than the previous, update the best time for the appropriate level
+				if time < cloud_data.doc_fields[currentLevel]:
+					var upload_task: FirestoreTask = await collection.update(auth.localid, data)
+			else:
+				# Upload the player's first completion time
 				var upload_task: FirestoreTask = await collection.update(auth.localid, data)
-			
 		
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		print(time)
