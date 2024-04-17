@@ -25,6 +25,21 @@ func formatTime(t):
 # Handles level completion. Makes sure that the collision was from the player
 func _on_level_completion(body, level):
 	if body is CharacterBody3D:
+		var currentLevel
+		# Godot's switch equivalent, checking the level
+		match level:
+			1: currentLevel = "level1"
+			2: currentLevel = "level2"
+		# Save the time
+		var auth = Firebase.Auth.auth
+		if auth && level < 100:
+			var collection: FirestoreCollection = Firebase.Firestore.collection("highscores")
+			var data: Dictionary = {
+				currentLevel: time
+			}
+			var task: FirestoreTask = await collection.update(auth.localid, data)
+			
+		
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		print(time)
 		get_tree().change_scene_to_file("res://Scenes/DebugMenu.tscn")
