@@ -33,11 +33,20 @@ func _on_level_completion(body, level):
 		# Save the time
 		var auth = Firebase.Auth.auth
 		if auth && level < 100:
+			# Set the database collection target to the highscores collection
 			var collection: FirestoreCollection = Firebase.Firestore.collection("highscores")
+			# Grab the player's data
+			var download_task: FirestoreTask = collection.get_doc(auth.localid)
+			var finished_task: FirestoreTask = await download_task.task_finished
+			# Store the player's data in cloud_data
+			var cloud_data = finished_task.document
+			# The finished time we wish to upload
 			var data: Dictionary = {
 				currentLevel: time
 			}
-			var task: FirestoreTask = await collection.update(auth.localid, data)
+			# If the new time is faster (smaller) than the previous, update the best time for the appropriate level
+			if time < cloud_data.doc_fields[currentLevel]:
+				var upload_task: FirestoreTask = await collection.update(auth.localid, data)
 			
 		
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
