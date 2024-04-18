@@ -46,7 +46,8 @@ func _on_level_completion(body, level):
 			}
 			# If the player doesn't have a level completion time, do not run the completion time comparison
 			# (Because it doesn't exist yet!)
-			if cloud_data:
+			# This check was made even stricter 
+			if cloud_data and cloud_data.doc_fields and cloud_data.doc_fields.has(currentLevel):
 				# If the new time is faster (smaller) than the previous, update the best time for the appropriate level
 				if time < cloud_data.doc_fields[currentLevel]:
 					var upload_task: FirestoreTask = await collection.update(auth.localid, data)
