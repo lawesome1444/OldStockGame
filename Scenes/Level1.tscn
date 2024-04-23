@@ -302,9 +302,11 @@ shape = SubResource("BoxShape3D_8c3nv")
 
 [node name="GUI" type="Control" parent="."]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="xSpeed" type="RichTextLabel" parent="GUI"]
 layout_mode = 0
@@ -331,9 +333,11 @@ offset_right = 392.0
 offset_bottom = 112.0
 
 [node name="GridContainer" type="GridContainer" parent="GUI"]
-layout_mode = 0
-offset_right = 1152.0
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
 offset_bottom = 40.0
+grow_horizontal = 2
 
 [node name="Label" type="Label" parent="GUI/GridContainer"]
 layout_mode = 2
