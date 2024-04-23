@@ -9,6 +9,12 @@ func _ready():
 	Firebase.Auth.signup_succeeded.connect(on_signup_succeeded)
 	Firebase.Auth.login_failed.connect(on_login_failed)
 	Firebase.Auth.signup_failed.connect(on_signup_failed)
+	
+	# If the player is already logged in, enable the highscore button and reflect they are logged in
+	var auth = Firebase.Auth.auth
+	if auth:
+		$"../GridContainer/Button4".disabled = false
+		%StateLabel.text = "Logged in"
 
 func _on_login_button_pressed():
 	# Grab the Email and Password from the entry fields
@@ -35,6 +41,8 @@ func _on_signup_button_pressed():
 func on_login_succeeded(res):
 	print(res)
 	%StateLabel.text = "Login succeeded!"
+	# Enable the user to view highscores
+	$"../GridContainer/Button4".disabled = false
 	
 func on_signup_succeeded(res):
 	print(res)

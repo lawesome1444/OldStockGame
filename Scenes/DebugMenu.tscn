@@ -41,6 +41,7 @@ text = "Level 2"
 
 [node name="Button4" type="Button" parent="GridContainer"]
 layout_mode = 2
+disabled = true
 text = "High Scores"
 
 [node name="Authentication" type="Control" parent="."]
