@@ -48,7 +48,6 @@ func _on_listed_documents(documents: Array):
 			print(doc.doc_fields.name)
 			var text: Label = Label.new()
 			text.set_text(str(doc.doc_fields.name))
-			
 			hbox.add_child(text)
 		if doc.doc_fields.has("level1") && (levelQuery == 1 || !levelQuery):
 			print(doc.doc_fields.level1)

@@ -91,17 +91,20 @@ layout_mode = 2
 text = "Not Logged In"
 horizontal_alignment = 1
 
+[node name="Name" type="LineEdit" parent="Authentication/VBoxContainer"]
+layout_mode = 2
+placeholder_text = "Name (Not Required for Log In)"
+alignment = 1
+
 [node name="EmailInput" type="LineEdit" parent="Authentication/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "test@test.com"
 placeholder_text = "Email"
 alignment = 1
 
 [node name="PasswordInput" type="LineEdit" parent="Authentication/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "testtest"
 placeholder_text = "Password"
 alignment = 1
 
