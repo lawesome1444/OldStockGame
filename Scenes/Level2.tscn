@@ -1,6 +1,6 @@
-[gd_scene load_steps=58 format=3 uid="uid://bvpx7ams4mvpo"]
+[gd_scene load_steps=59 format=3 uid="uid://bvpx7ams4mvpo"]
 
-[ext_resource type="PackedScene" uid="uid://62ae7w3711pj" path="res://Assets/Models/player.res" id="1_00u37"]
+[ext_resource type="PackedScene" uid="uid://um25f3xdqck4" path="res://Assets/Models/player_test.res" id="1_00u37"]
 [ext_resource type="Script" path="res://Scripts/GameMaster.gd" id="1_b7saw"]
 [ext_resource type="Texture2D" uid="uid://cgdbs25mlg03v" path="res://Assets/Textures/labfloor.jpg" id="3_c16nj"]
 [ext_resource type="Texture2D" uid="uid://ceeuxev8bvncb" path="res://Assets/Textures/labwall.jpg" id="4_ac85k"]
@@ -370,6 +370,9 @@ emission_enabled = true
 emission = Color(0.839216, 0.654902, 0.0352941, 1)
 emission_energy_multiplier = 5.68
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_5hx6u"]
+size = Vector3(1, 1, 7)
+
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_nc2uf"]
 
 [sub_resource type="Sky" id="Sky_r7yts"]
@@ -394,6 +397,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.18751, -1)
 
 [node name="CharacterBody3D" parent="Player" index="0"]
 checkpoint_list = [Vector3(0, 2.5, 0), Vector3(-4, 14, -60.5), Vector3(-4, 15, -95)]
+
+[node name="RightArm" parent="Player/CharacterBody3D/OldStockbk2/OldStockBody" index="4"]
+transform = Transform3D(0.12941, -0.193185, 1.6199e-08, 0.482962, 0.0517639, -2.1111e-08, 3.23981e-08, 1.68888e-08, 0.25, -0.991295, 0.100138, -3.01458e-08)
 
 [node name="Checkpoints" type="Node3D" parent="."]
 
@@ -757,6 +763,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 material_override = SubResource("StandardMaterial3D_jpf67")
 size = Vector3(1, 1, 7)
 
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hazards/Area3D6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_5hx6u")
+
 [node name="Area3D7" type="Area3D" parent="Hazards"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 12.5, -108)
 
@@ -764,6 +774,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 12.5, -108)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 material_override = SubResource("StandardMaterial3D_jpf67")
 size = Vector3(1, 1, 7)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hazards/Area3D7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_5hx6u")
 
 [node name="Area3D8" type="Area3D" parent="Hazards"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 12.5, -115)
@@ -773,6 +787,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 material_override = SubResource("StandardMaterial3D_jpf67")
 size = Vector3(1, 1, 7)
 
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hazards/Area3D8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_5hx6u")
+
 [node name="Area3D9" type="Area3D" parent="Hazards"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 12.5, -122)
 
@@ -780,6 +798,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 12.5, -122)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 material_override = SubResource("StandardMaterial3D_jpf67")
 size = Vector3(1, 1, 7)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hazards/Area3D9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_5hx6u")
 
 [node name="Area3D10" type="Area3D" parent="Hazards"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 12.5, -129)
@@ -789,6 +811,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 material_override = SubResource("StandardMaterial3D_jpf67")
 size = Vector3(1, 1, 7)
 
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hazards/Area3D10"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_5hx6u")
+
 [node name="Area3D11" type="Area3D" parent="Hazards"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 12.5, -136)
 
@@ -796,6 +822,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 12.5, -136)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 material_override = SubResource("StandardMaterial3D_jpf67")
 size = Vector3(1, 1, 7)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hazards/Area3D11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_5hx6u")
 
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Hazards")
@@ -865,6 +895,13 @@ shape = SubResource("BoxShape3D_khjmx")
 [connection signal="body_entered" from="Hazards/Area3D" to="Player/CharacterBody3D" method="_on_player_death"]
 [connection signal="body_entered" from="Hazards/Area3D4" to="Player/CharacterBody3D" method="_on_player_death"]
 [connection signal="body_entered" from="Hazards/Area3D5" to="Player/CharacterBody3D" method="_on_player_death"]
+[connection signal="body_entered" from="Hazards/Area3D6" to="Player/CharacterBody3D" method="_on_player_death"]
+[connection signal="body_entered" from="Hazards/Area3D7" to="Player/CharacterBody3D" method="_on_player_death"]
+[connection signal="body_entered" from="Hazards/Area3D8" to="Player/CharacterBody3D" method="_on_player_death"]
+[connection signal="body_entered" from="Hazards/Area3D9" to="Player/CharacterBody3D" method="_on_player_death"]
+[connection signal="body_entered" from="Hazards/Area3D10" to="Player/CharacterBody3D" method="_on_player_death"]
+[connection signal="body_entered" from="Hazards/Area3D11" to="Player/CharacterBody3D" method="_on_player_death"]
 [connection signal="body_entered" from="Area3D" to="." method="_on_level_completion" binds= [2]]
 
 [editable path="Player"]
+[editable path="Player/CharacterBody3D/OldStockbk2"]
