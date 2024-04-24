@@ -6,7 +6,7 @@ var timeGUI
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	timeGUI = get_node("GUI/GridContainer/Label")
+	timeGUI = get_node("GUI/Panel/Label")
 	pass # Replace with function body.
 
 func _process(delta):
@@ -58,3 +58,8 @@ func _on_level_completion(body, level):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		print(time)
 		get_tree().change_scene_to_file("res://Scenes/DebugMenu.tscn")
+		
+# handle restarts and exits
+func _on_restart_exit(path: String):
+	get_tree().change_scene_to_file(path)
+	pass

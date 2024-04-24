@@ -4,6 +4,10 @@ extends Node3D
 var mouse_speed = 0.1
 var controller_speed = 150
 
+# Find out if a in-game menu is open to block attempts to relock the camera to the window
+# aka Stop the game from locking the mouse to the window and hiding it
+var menu_block = false
+
 # Specifying that the player_node variable is CharacterBody3D
 var player_node : CharacterBody3D
 
@@ -19,16 +23,20 @@ func _ready():
 	pass # Replace with function body.
 
 func _input(event):
-	# If escape is pressed, unlock the window
-	if event.is_action_pressed("ui_cancel"):
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	# If the Menu button is pressed, lock/unlock the mouse to the window
+	if event.is_action_pressed("menu"):
+		if menu_block == false:
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		if menu_block == true:
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		menu_block = !menu_block
 		
 	# If the user clicks the window, lock the mouse to the game
-	if event.is_action_pressed("mouse_1"):
+	if event.is_action_pressed("mouse_1") && menu_block == false:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
 	# Check if the event is mouse motion
-	if event is InputEventMouseMotion:
+	if event is InputEventMouseMotion && menu_block == false:
 		# Get the relative motion of the mouse
 		var mouse_motion = event.relative
 		rotate_camera(mouse_motion, mouse_speed)
@@ -52,3 +60,8 @@ func rotate_camera(rotation, speed):
 	# Apply the new rotation to the camera
 	self.rotation_degrees.x = new_rotation.x
 	player_node.global_rotation_degrees.y = new_player_rotation.y
+	
+# IF the resume button is pressed, return to the game and starting capturing the mouse again
+func _on_resume_button():
+	menu_block = false
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)

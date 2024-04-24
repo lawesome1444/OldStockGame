@@ -1,12 +1,9 @@
-[gd_scene load_steps=43 format=3 uid="uid://dvdmk1uod5qy5"]
+[gd_scene load_steps=40 format=3 uid="uid://dvdmk1uod5qy5"]
 
 [ext_resource type="Script" path="res://Scripts/GameMaster.gd" id="1_5xg8y"]
 [ext_resource type="PackedScene" uid="uid://um25f3xdqck4" path="res://Assets/Models/player_test.res" id="2_x2k4a"]
 [ext_resource type="Texture2D" uid="uid://cbmphl2qfmapd" path="res://Assets/Textures/rockplatform.jpg" id="3_vfp12"]
 [ext_resource type="Texture2D" uid="uid://v6qjgj0jm4wl" path="res://Assets/Textures/cavewall.jpg" id="4_0cj0c"]
-[ext_resource type="StyleBox" uid="uid://bwg818nwk5gr0" path="res://Assets/ModelMats/UI/Buttons/normal.tres" id="5_qwojm"]
-[ext_resource type="StyleBox" uid="uid://b7p2heogmqqyh" path="res://Assets/ModelMats/UI/Buttons/hover.tres" id="6_ua21x"]
-[ext_resource type="StyleBox" uid="uid://dg5kla4lifhdn" path="res://Assets/ModelMats/UI/Buttons/pressed.tres" id="7_0p86g"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4tcee"]
 albedo_texture = ExtResource("3_vfp12")
@@ -95,7 +92,7 @@ size = Vector3(16.4194, 5, 12.0732)
 bg_color = Color(0.00784314, 0.278431, 0.235294, 0.392157)
 corner_radius_bottom_left = 55
 
-[sub_resource type="FontFile" id="FontFile_6jb6g"]
+[sub_resource type="FontFile" id="FontFile_2xylk"]
 cache/0/16/0/ascent = 0.0
 cache/0/16/0/descent = 0.0
 cache/0/16/0/underline_position = 0.0
@@ -104,7 +101,7 @@ cache/0/16/0/scale = 1.0
 cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
 
 [sub_resource type="LabelSettings" id="LabelSettings_ci2t6"]
-font = SubResource("FontFile_6jb6g")
+font = SubResource("FontFile_2xylk")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s8cxd"]
 bg_color = Color(0.00784314, 0.278431, 0.235294, 1)
@@ -433,9 +430,6 @@ anchor_right = 1.0
 offset_top = 70.0
 offset_bottom = 110.0
 grow_horizontal = 2
-theme_override_styles/normal = ExtResource("5_qwojm")
-theme_override_styles/hover = ExtResource("6_ua21x")
-theme_override_styles/pressed = ExtResource("7_0p86g")
 text = "Resume Level"
 
 [node name="Restart" type="Button" parent="GUI/MenuDim/Panel"]
@@ -445,9 +439,6 @@ anchor_right = 1.0
 offset_top = 110.0
 offset_bottom = 150.0
 grow_horizontal = 2
-theme_override_styles/normal = ExtResource("5_qwojm")
-theme_override_styles/hover = ExtResource("6_ua21x")
-theme_override_styles/pressed = ExtResource("7_0p86g")
 text = "Restart Level"
 
 [node name="Exit" type="Button" parent="GUI/MenuDim/Panel"]
@@ -457,9 +448,6 @@ anchor_right = 1.0
 offset_top = 150.0
 offset_bottom = 190.0
 grow_horizontal = 2
-theme_override_styles/normal = ExtResource("5_qwojm")
-theme_override_styles/hover = ExtResource("6_ua21x")
-theme_override_styles/pressed = ExtResource("7_0p86g")
 text = "Exit to Menu"
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
@@ -474,9 +462,6 @@ environment = SubResource("Environment_apkmu")
 [connection signal="body_entered" from="LevelGeometry/BoxOut/Area3D3" to="Player/CharacterBody3D" method="_on_checkpoint_reached" binds= [2]]
 [connection signal="body_entered" from="LevelGeometry/BoxOut/Area3D2" to="Player/CharacterBody3D" method="_on_player_death"]
 [connection signal="body_entered" from="LevelGeometry/BoxOut/Area3D4" to="." method="_on_level_completion" binds= [1]]
-[connection signal="pressed" from="GUI/MenuDim/Panel/Resume" to="Player/CharacterBody3D/OrbitCamera" method="_on_resume_button"]
-[connection signal="pressed" from="GUI/MenuDim/Panel/Restart" to="." method="_on_restart_exit" binds= ["res://Scenes/Level1.tscn"]]
-[connection signal="pressed" from="GUI/MenuDim/Panel/Exit" to="." method="_on_restart_exit" binds= ["res://Scenes/DebugMenu.tscn"]]
 
 [editable path="Player"]
 [editable path="Player/CharacterBody3D/OldStockbk2"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://bvpx7ams4mvpo"]
+[gd_scene load_steps=67 format=3 uid="uid://bvpx7ams4mvpo"]
 
 [ext_resource type="PackedScene" uid="uid://um25f3xdqck4" path="res://Assets/Models/player_test.res" id="1_00u37"]
 [ext_resource type="Script" path="res://Scripts/GameMaster.gd" id="1_b7saw"]
@@ -8,6 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://c1lhsjkyce6by" path="res://Assets/Textures/labflooralt.jpg" id="6_qcpnj"]
 [ext_resource type="Texture2D" uid="uid://crcbc4vvg68s" path="res://Assets/Textures/labtunnel.jpg" id="7_shrev"]
 [ext_resource type="Material" uid="uid://c7gv4ey7n8jpg" path="res://Assets/ModelMats/firetrap.tres" id="8_alh4e"]
+[ext_resource type="StyleBox" uid="uid://bwg818nwk5gr0" path="res://Assets/ModelMats/UI/Buttons/normal.tres" id="9_bjj8k"]
+[ext_resource type="StyleBox" uid="uid://b7p2heogmqqyh" path="res://Assets/ModelMats/UI/Buttons/hover.tres" id="10_3fwmm"]
+[ext_resource type="StyleBox" uid="uid://dg5kla4lifhdn" path="res://Assets/ModelMats/UI/Buttons/pressed.tres" id="11_o04ur"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7syda"]
 size = Vector3(4.91943, 5.92725, 5)
@@ -372,6 +375,35 @@ emission_energy_multiplier = 5.68
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5hx6u"]
 size = Vector3(1, 1, 7)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2llhe"]
+bg_color = Color(0.00784314, 0.278431, 0.235294, 0.392157)
+corner_radius_bottom_left = 55
+
+[sub_resource type="FontFile" id="FontFile_encjo"]
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
+
+[sub_resource type="LabelSettings" id="LabelSettings_xxvs6"]
+font = SubResource("FontFile_encjo")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2lukm"]
+bg_color = Color(0.00784314, 0.278431, 0.235294, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tk32t"]
+bg_color = Color(0.00392157, 0.160784, 0.133333, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_nc2uf"]
 
@@ -836,9 +868,11 @@ autoplay = "rolling_hazard"
 
 [node name="GUI" type="Control" parent="."]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="xSpeed" type="RichTextLabel" parent="GUI"]
 layout_mode = 0
@@ -864,15 +898,103 @@ offset_top = 86.0
 offset_right = 392.0
 offset_bottom = 112.0
 
-[node name="GridContainer" type="GridContainer" parent="GUI"]
-layout_mode = 0
-offset_right = 1152.0
-offset_bottom = 40.0
+[node name="Panel" type="Panel" parent="GUI"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -200.0
+offset_bottom = 100.0
+grow_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_2llhe")
 
-[node name="Label" type="Label" parent="GUI/GridContainer"]
-layout_mode = 2
+[node name="Label" type="Label" parent="GUI/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -0.5
+offset_top = -11.5
+offset_right = 0.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 10
+label_settings = SubResource("LabelSettings_xxvs6")
 horizontal_alignment = 1
+
+[node name="MenuDim" type="Panel" parent="GUI"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="GUI/MenuDim"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -245.0
+offset_right = 200.0
+offset_bottom = 255.001
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_2lukm")
+
+[node name="Label" type="Label" parent="GUI/MenuDim/Panel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 50.0
+grow_horizontal = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_tk32t")
+text = "Menu"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Resume" type="Button" parent="GUI/MenuDim/Panel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 70.0
+offset_bottom = 110.0
+grow_horizontal = 2
+theme_override_styles/normal = ExtResource("9_bjj8k")
+theme_override_styles/hover = ExtResource("10_3fwmm")
+theme_override_styles/pressed = ExtResource("11_o04ur")
+text = "Resume Level"
+
+[node name="Restart" type="Button" parent="GUI/MenuDim/Panel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 110.0
+offset_bottom = 150.0
+grow_horizontal = 2
+theme_override_styles/normal = ExtResource("9_bjj8k")
+theme_override_styles/hover = ExtResource("10_3fwmm")
+theme_override_styles/pressed = ExtResource("11_o04ur")
+text = "Restart Level"
+
+[node name="Exit" type="Button" parent="GUI/MenuDim/Panel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 150.0
+offset_bottom = 190.0
+grow_horizontal = 2
+theme_override_styles/normal = ExtResource("9_bjj8k")
+theme_override_styles/hover = ExtResource("10_3fwmm")
+theme_override_styles/pressed = ExtResource("11_o04ur")
+text = "Exit to Menu"
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.0885814, 0.996069, 0, -0.996069, -0.0885814, 32, 121, -20)
@@ -901,6 +1023,9 @@ shape = SubResource("BoxShape3D_khjmx")
 [connection signal="body_entered" from="Hazards/Area3D9" to="Player/CharacterBody3D" method="_on_player_death"]
 [connection signal="body_entered" from="Hazards/Area3D10" to="Player/CharacterBody3D" method="_on_player_death"]
 [connection signal="body_entered" from="Hazards/Area3D11" to="Player/CharacterBody3D" method="_on_player_death"]
+[connection signal="pressed" from="GUI/MenuDim/Panel/Resume" to="Player/CharacterBody3D/OrbitCamera" method="_on_resume_button"]
+[connection signal="pressed" from="GUI/MenuDim/Panel/Restart" to="." method="_on_restart_exit" binds= ["res://Scenes/Level2.tscn"]]
+[connection signal="pressed" from="GUI/MenuDim/Panel/Exit" to="." method="_on_restart_exit" binds= ["res://Scenes/DebugMenu.tscn"]]
 [connection signal="body_entered" from="Area3D" to="." method="_on_level_completion" binds= [2]]
 
 [editable path="Player"]
