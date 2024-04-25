@@ -877,17 +877,20 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="xSpeed" type="RichTextLabel" parent="GUI"]
+visible = false
 layout_mode = 0
 offset_right = 387.0
 offset_bottom = 26.0
 
 [node name="ySpeed" type="RichTextLabel" parent="GUI"]
+visible = false
 layout_mode = 0
 offset_top = 22.0
 offset_right = 390.0
 offset_bottom = 48.0
 
 [node name="zSpeed" type="RichTextLabel" parent="GUI"]
+visible = false
 layout_mode = 0
 offset_left = -1.0
 offset_top = 45.0
@@ -895,6 +898,7 @@ offset_right = 391.0
 offset_bottom = 71.0
 
 [node name="Rotation" type="RichTextLabel" parent="GUI"]
+visible = false
 layout_mode = 0
 offset_top = 86.0
 offset_right = 392.0

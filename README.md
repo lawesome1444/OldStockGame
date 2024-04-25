@@ -1,7 +1,5 @@
 <h1>Old Stock Game</h1>
 <h2> Created on Godot v4.2.1</h2>
-<br>
-<i>Please note that these instructions will change as the project is developed</i>
 <br>If you would like to open the project:
 <br>-> Download and extract Godot 4 to a folder 
 <br>-> Clone the repository to a folder
@@ -15,10 +13,6 @@
 <br>-> Open the path to the rcedit.exe file using Godot's file browser
 <br>-> Navigate to Project->Export->Old Stock(Runnable)
 <br><i><b>If you are getting a warning  to install export layouts, simply click to install them and return here once done</b></i>
-<br>-> Click "Export Project", then select the folder you want to build the game to
+<br>-> Click the <i>Resources</i> tab, then ensure "*.env" (without quotes) is pasted into the <i>Filters to export non-resource files/folders</i>
+<br>-> Click "Export Project", then select the folder where you want to build the game
 <br>-> Open the game by navigating to the export location and launch the executable
-
-
-The project can be opened in Godot by cloning the repo and opening the folder in Godot.
-
-Exporting is also done through Godot. Instructions to be added later.

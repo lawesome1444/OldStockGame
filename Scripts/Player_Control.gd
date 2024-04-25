@@ -20,10 +20,10 @@ var camera
 
 
 #Import UI Elements
-var xSpeed
-var ySpeed
-var zSpeed
-var rotationgui
+#var xSpeed
+#var ySpeed
+#var zSpeed
+#var rotationgui
 
 # Importing menu
 var game_menu
@@ -32,10 +32,10 @@ func _ready():
 	# Import camera
 	camera = get_node("./OrbitCamera")
 	#Import UI
-	xSpeed = get_node("../../GUI/xSpeed")
-	ySpeed = get_node("../../GUI/ySpeed")
-	zSpeed = get_node("../../GUI/zSpeed")
-	rotationgui = get_node("../../GUI/Rotation")
+	#xSpeed = get_node("../../GUI/xSpeed")
+	#ySpeed = get_node("../../GUI/ySpeed")
+	#zSpeed = get_node("../../GUI/zSpeed")
+	#rotationgui = get_node("../../GUI/Rotation")
 	game_menu = get_node("../../GUI/MenuDim")
 	#Get the animation player
 	animationTree = get_node("./AnimationTree")
@@ -111,10 +111,10 @@ func _physics_process(delta):
 			velocity.z = move_toward(velocity.z, 0, decelerate_player() * delta)
 		
 		
-		xSpeed.text = "X Speed = " + str(velocity.x)
-		ySpeed.text = "Y Speed = " + str(velocity.y)
-		zSpeed.text = "Z Speed = " + str(velocity.z)
-		rotationgui.text = "Rotation = " + str(rotation.y)
+		#xSpeed.text = "X Speed = " + str(velocity.x)
+		#ySpeed.text = "Y Speed = " + str(velocity.y)
+		#zSpeed.text = "Z Speed = " + str(velocity.z)
+		#rotationgui.text = "Rotation = " + str(rotation.y)
 		
 	move_and_slide()
 
