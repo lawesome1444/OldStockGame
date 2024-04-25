@@ -16,3 +16,14 @@
 <br>-> Click the <i>Resources</i> tab, then ensure "*.env" (without quotes) is pasted into the <i>Filters to export non-resource files/folders</i>
 <br>-> Click "Export Project", then select the folder where you want to build the game
 <br>-> Open the game by navigating to the export location and launch the executable
+
+<h2>Credits</h2>
+<br>
+Texture assets were obtained from <a href="https://polyhaven.com/about-contact">PolyHaven</a>. A full list can be found below:
+<br>-> <a href="https://polyhaven.com/a/dry_riverbed_rock">Dry Riverbed Rock</a>
+<br>-> <a href="https://polyhaven.com/a/factory_wall">Factory Wall</a>
+<br>-> <a href="https://polyhaven.com/a/metal_grate_rusty">Metal Grate Rusty</a>
+<br>-> <a href="https://polyhaven.com/a/metal_plate">Metal Plate</a>
+<br>-> <a href="https://polyhaven.com/a/rock_face_03">Rock Face 03</a>
+<br>-> <a href="https://polyhaven.com/a/rubber_tiles">Rubber Tiles</a>
+<br>-> <a href="https://polyhaven.com/a/rusty_metal_sheet">Rusty Metal Sheet</a>
