@@ -40,6 +40,8 @@ func _ready():
 	#Get the animation player
 	animationTree = get_node("./AnimationTree")
 	#animationPlayer.play("idle", -1, 1.0, false)
+	camera.focus_btn = get_node("../../GUI/MenuDim/Panel/Resume")
+
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -57,6 +59,7 @@ func _physics_process(delta):
 	# Do not handle any movement if an in-game menu is active
 	if camera.menu_block == true:
 		game_menu.visible = true
+		pass
 	else:
 		# Hide the in-game menu
 		game_menu.visible = false

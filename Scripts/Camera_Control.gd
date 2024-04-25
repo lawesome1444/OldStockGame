@@ -10,26 +10,30 @@ var menu_block = false
 
 # Specifying that the player_node variable is CharacterBody3D
 var player_node : CharacterBody3D
-
+var focus_btn
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	
 	# Set the characterbody3d as the player's one
 	player_node = get_node("../../CharacterBody3D")
+	# Get the first button in the main menu
 	# Lock the mouse to the window
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
 	
 	pass # Replace with function body.
 
+
+
 func _input(event):
 	# If the Menu button is pressed, lock/unlock the mouse to the window
-	if event.is_action_pressed("menu"):
-		if menu_block == false:
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		if menu_block == true:
-			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-		menu_block = !menu_block
+	#if event.is_action_pressed("menu"):
+		#if menu_block == false:
+			#Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			#focus_btn.grab_focus()
+		#if menu_block == true:
+			#Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		#menu_block = !menu_block
 		
 	# If the user clicks the window, lock the mouse to the game
 	if event.is_action_pressed("mouse_1") && menu_block == false:
@@ -45,6 +49,15 @@ func _input(event):
 func _process(delta):
 	var controller_motion = Input.get_vector("camera_left", "camera_right", "camera_up", "camera_down") * delta
 	rotate_camera(controller_motion, controller_speed)
+	
+		# If the Menu button is pressed, lock/unlock the mouse to the window
+	if Input.is_action_just_pressed("menu"):
+		if menu_block == false:
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			focus_btn.grab_focus()
+		if menu_block == true:
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		menu_block = !menu_block
 	pass
 
 func rotate_camera(rotation, speed):

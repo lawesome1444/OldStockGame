@@ -413,6 +413,8 @@ sky_material = SubResource("ProceduralSkyMaterial_nc2uf")
 [sub_resource type="Environment" id="Environment_87pxr"]
 background_mode = 2
 sky = SubResource("Sky_r7yts")
+glow_enabled = true
+glow_blend_mode = 0
 fog_enabled = true
 fog_light_color = Color(0.305882, 0.415686, 0.384314, 1)
 fog_sun_scatter = 0.1
@@ -926,7 +928,6 @@ label_settings = SubResource("LabelSettings_xxvs6")
 horizontal_alignment = 1
 
 [node name="MenuDim" type="Panel" parent="GUI"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

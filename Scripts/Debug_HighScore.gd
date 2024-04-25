@@ -7,6 +7,8 @@ func _ready():
 	grid = get_node("Control/ScrollContainer/VBoxContainer")
 	# Store current user authentification
 	var auth = Firebase.Auth.auth
+	# Focus on the first button for controller users
+	$FilterTabs/Button.grab_focus()
 	
 	# List all documents in the highscores collection
 	var list_task: FirestoreTask = Firebase.Firestore.list("highscores")
