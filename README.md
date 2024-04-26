@@ -27,3 +27,5 @@ Texture assets were obtained from <a href="https://polyhaven.com/about-contact">
 <br>-> <a href="https://polyhaven.com/a/rock_face_03">Rock Face 03</a>
 <br>-> <a href="https://polyhaven.com/a/rubber_tiles">Rubber Tiles</a>
 <br>-> <a href="https://polyhaven.com/a/rusty_metal_sheet">Rusty Metal Sheet</a>
+<br>
+Godot Firebase plugin for Godot, found <a href= "https://github.com/GodotNuts/GodotFirebase">here</a>.
